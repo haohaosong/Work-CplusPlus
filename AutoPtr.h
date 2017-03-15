@@ -46,19 +46,19 @@ template<typename T>
 class AutoPtr
 {
 public:
-	AutoPtr(T* ap)
+	AutoPtr(T* ap = NULL)
 		:_p(ap)
 	{
 		ap = NULL;
 		cout << "AutoPtr()" << endl;
 	}
-	
+
 	AutoPtr(AutoPtr& ap)
 		:_p(ap._p)
 	{
 		ap._p = NULL;
 	}
-	
+
 	AutoPtr& operator=(AutoPtr&ap)
 	{
 		if (this != &ap)
@@ -73,19 +73,36 @@ public:
 
 		return *this;
 	}
-	
+
 	~AutoPtr()
 	{
-		cout << "~AutoPtr()" << endl;
 		if (_p != NULL)
 		{
+			cout << "~AutoPtr()" << endl;
 			delete[] _p;
 			_p = NULL;
 		}
 	}
+
+	T* Get()
+	{
+		return _p;
+	}
+
+	T& operator*()
+	{
+		return *_p;
+	}
+
+	T* operator->()
+	{
+		return _p;
+	}
+
 private:
 	T* _p;
 };
+
 
 void FunTest1()
 {
