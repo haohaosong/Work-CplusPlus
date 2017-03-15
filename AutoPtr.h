@@ -52,7 +52,13 @@ public:
 		ap = NULL;
 		cout << "AutoPtr()" << endl;
 	}
-
+	
+	AutoPtr(AutoPtr& ap)
+		:_p(ap._p)
+	{
+		ap._p = NULL;
+	}
+	
 	~AutoPtr()
 	{
 		cout << "~AutoPtr()" << endl;
