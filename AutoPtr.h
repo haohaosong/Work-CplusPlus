@@ -59,6 +59,21 @@ public:
 		ap._p = NULL;
 	}
 	
+	AutoPtr& operator=(AutoPtr&ap)
+	{
+		if (this != &ap)
+		{
+			if (_p != NULL)
+			{
+				delete _p;
+				_p = ap._p;
+				ap._p = NULL;
+			}
+		}
+
+		return *this;
+	}
+	
 	~AutoPtr()
 	{
 		cout << "~AutoPtr()" << endl;
